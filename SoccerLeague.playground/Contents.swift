@@ -1,5 +1,17 @@
-//: Playground - noun: a place where people can play
+/**********************************************************************
+ SOCCER LEAGUE
+ Author: Walter Allen
+ 
+ This project was created to satisfy the requirements of the
+ Team TreeHouse iOS TechDegree - Project #1.
+ 
+ It divides a hard-coded dictionary of team players into three equal
+ teams, ensuring that each team has an equal number of players with
+ expeience and an equal number of players without experience and that
+ each team's average height is within 1.5 cm of the other teams'
+ average heights.
+ 
+ The program then creates Welcome Letters for each team and outputs
+ those letters to the console.
+ **********************************************************************/
 
-import UIKit
-
-var str = "Hello, playground"
