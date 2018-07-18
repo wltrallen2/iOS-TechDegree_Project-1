@@ -68,26 +68,56 @@ var leagueTeams = [teamSharks, teamDragons, teamRaptors]
  the file.
  **********************************************************************/
 
-// TODO: Finish coding and commenting each helper function
-func getPlayers(withExperience experience: Bool) -> ([[String:String]], [[String:String]]) {
-    var expPlayers: Array<Dictionary<String, String>> = [[:]]
-    var inexpPlayers: Array<Dictionary<String, String>> = [[:]]
+/* Returns a tuple of two arrays. Each array is a dictionary of players.
+ * One dictionary represents players with experience, and the second
+ * represents players without experience.
+ */
+func dividePlayersByExperienceLevels()
+    -> (Array<Dictionary<String, String>>, Array<Dictionary<String, String>>) {
+    var expPlayers: Array<Dictionary<String, String>> = []
+    var inexpPlayers: Array<Dictionary<String, String>> = []
+        
+        for player in players {
+            if player["Soccer Experience"] == "YES" {
+                expPlayers.append(player)
+            } else {
+                inexpPlayers.append(player)
+            }
+        }
     return (expPlayers, inexpPlayers)
 }
 
+// TODO: Implement this function
 func distributePlayersIntoLeague(using players: Array<Dictionary<String, String>>) -> () {
+
+}
+
+/* Returns null. Iterates through an array of dictionaries, which each represent
+ * a soccer player, and prints each player in the array as a string in the
+ * following format: PlayerName (HasExperience) - Height
+*/
+func printPlayersToConsole(forTeam team: Array<Dictionary<String, String>>) -> () {
+    for player in team {
+        player
+        let name = player["Name"] as! String
+        let height = player["Height (inches)"] as! String
+        let experience = player["Soccer Experience"]
+        let expMarker = experience == "YES" ? "Y" : "N"
+        print("\(name) (\(expMarker)) - \(height)\"")
+    }
+}
+
+// TODO: Implement this function
+func printTeamsToConsole(forTeams teams: Array<Array<Dictionary<String, String>>>) -> () {
     
 }
 
-func printTeamsToConsole(forTeams teams: Array<Array<Dictionary<String, String>>>,
-                         includingAverageHeight includeAverageHeight: Bool) -> () {
-    
-}
-
+// TODO: Implement this function
 func createLetters(forMembersOfTeams teams: Array<Array<Dictionary<String, String>>>) -> Array<String> {
     return []
 }
 
+// TODO: Implement this function
 func printLettersToConsole(using letters: Array<String>) -> () {
     
 }
@@ -112,10 +142,10 @@ func printLettersToConsole(using letters: Array<String>) -> () {
  
  - prints those letters to the console.
  **********************************************************************/
-let (experiencedPlayers, inexperiencedPlayers) = getPlayers(withExperience: true)
+let (experiencedPlayers, inexperiencedPlayers) = dividePlayersByExperienceLevels()
 distributePlayersIntoLeague(using: experiencedPlayers)
 distributePlayersIntoLeague(using: inexperiencedPlayers)
-printTeamsToConsole(forTeams: leagueTeams, includingAverageHeight: true)
+printTeamsToConsole(forTeams: leagueTeams)
 
-let letters = createLetters(forMembersOfTeams:leagueTeams)
+let letters = createLetters(forMembersOfTeams: leagueTeams)
 printLettersToConsole(using: letters)
