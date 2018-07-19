@@ -87,9 +87,69 @@ func dividePlayersByExperienceLevels()
     return (expPlayers, inexpPlayers)
 }
 
-// TODO: Implement this function
-func distributePlayersIntoLeague(using players: Array<Dictionary<String, String>>) -> () {
+func getTotalHeightsOfPlayersInInches(inArray players: Array<Dictionary<String, String>>) -> Int {
+    var totalHeight = 0
+    for player in players {
+        let playerHeight = player["Height (inches)"] as! String
+        totalHeight += Int(playerHeight)!
+    }
+    
+    return totalHeight
+}
 
+func hasEmptyTeams(in arrayOfTeams: Array<Array<Dictionary<String, String>>>) -> Bool {
+    for team in leagueTeams {
+        if team.count == 0 {
+            return true
+        }
+    }
+    
+    return false
+}
+
+/*
+ * Returns null.
+ * Accepts an array of player dictionaries. Then, the function sorts those dictionaries
+ * from high to low using the passed variable, distributionKey, which should
+ * be a String representing a key in the player dictionary. Then, it
+ * distributes the players evenly into the teams arrays in the global variable,
+ * league, making sure that the average value for the distributionKey has
+ * minimal variance across the teams.
+ *
+ * It operates using the following algorithm:
+ * a) If no teams have been placed into the league, starting with the
+ *    element with the greatest distributionKey value, place one
+ *    element of the sorted array into each team in the league, where x
+ *    is the number of teams in the league,
+ * b) Calculate the total for all distributionKey values in the players array
+ *    and all players already placed in teams in the league,
+ * c) Divide the total by the number of teams in the league (dividedSum),
+ * d) From the teams that have the fewest players, identify the team which
+ *    has a sum of distributionKey values that is nearest to but less than the dividedsum,
+ * e) Place the next player dictionary in the identified team, and
+ * f) Repeat steps d & e until all players have been placed into league teams
+ */
+func distributePlayersIntoLeague(using players: Array<Dictionary<String, String>>,
+                                 andDistributionKey distributionKey: String) -> () {
+    var sortedPlayers = players.sorted{$0[distributionKey]! < $1[distributionKey]!}
+    
+    if hasEmptyTeams(in: leagueTeams) {
+        for index in leagueTeams.indices {
+            if let newPlayer = sortedPlayers.popLast() {
+                leagueTeams[index].append(newPlayer)
+            }
+        }
+    }
+    
+    var totalHeight = getTotalHeightsOfPlayersInInches(inArray: sortedPlayers)
+    for team in leagueTeams {
+        if team.count > 0 {
+            totalHeight += getTotalHeightsOfPlayersInInches(inArray: team)
+        }
+    }
+    let dividedSum = totalHeight / leagueTeams.count
+
+    //TODO: Continue implementation with step d above
 }
 
 /* Returns null. Iterates through an array of dictionaries, which each represent
@@ -143,8 +203,10 @@ func printLettersToConsole(using letters: Array<String>) -> () {
  - prints those letters to the console.
  **********************************************************************/
 let (experiencedPlayers, inexperiencedPlayers) = dividePlayersByExperienceLevels()
-distributePlayersIntoLeague(using: experiencedPlayers)
-distributePlayersIntoLeague(using: inexperiencedPlayers)
+distributePlayersIntoLeague(using: experiencedPlayers,
+                            andDistributionKey: "Height (inches)")
+distributePlayersIntoLeague(using: inexperiencedPlayers,
+                            andDistributionKey: "Height (inches)")
 printTeamsToConsole(forTeams: leagueTeams)
 
 let letters = createLetters(forMembersOfTeams: leagueTeams)
