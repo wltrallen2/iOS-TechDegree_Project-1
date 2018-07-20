@@ -87,6 +87,7 @@ func dividePlayersByExperienceLevels()
     return (expPlayers, inexpPlayers)
 }
 
+// TODO: Comment this function
 func getTotalHeightsOfPlayersInInches(inArray players: Array<Dictionary<String, String>>) -> Int {
     var totalHeight = 0
     for player in players {
@@ -97,6 +98,7 @@ func getTotalHeightsOfPlayersInInches(inArray players: Array<Dictionary<String, 
     return totalHeight
 }
 
+// TODO: Comment this function
 func hasEmptyTeams(in arrayOfTeams: Array<Array<Dictionary<String, String>>>) -> Bool {
     for team in leagueTeams {
         if team.count == 0 {
@@ -105,6 +107,28 @@ func hasEmptyTeams(in arrayOfTeams: Array<Array<Dictionary<String, String>>>) ->
     }
     
     return false
+}
+
+// TODO: Comment this function
+func getNumPlayersOnSmallestTeam() -> Int {
+    var minPlayers: Int = 0
+    for team in leagueTeams {
+        if minPlayers == 0 || team.count < minPlayers {
+            minPlayers = team.count
+        }
+    }
+    
+    return minPlayers
+}
+
+// TODO: Comment this function
+func getSum(ofDistributionKeys key: String,
+            inArray arrayOfDicts: Array<Dictionary<String, String>>) -> Int {
+    var sum = 0
+    for dict in arrayOfDicts {
+        sum += Int(dict[key]!)!
+    }
+    return sum
 }
 
 /*
@@ -133,6 +157,7 @@ func distributePlayersIntoLeague(using players: Array<Dictionary<String, String>
                                  andDistributionKey distributionKey: String) -> () {
     var sortedPlayers = players.sorted{$0[distributionKey]! < $1[distributionKey]!}
     
+    // If all teams are empty, place one player from the sorted arrage on each team
     if hasEmptyTeams(in: leagueTeams) {
         for index in leagueTeams.indices {
             if let newPlayer = sortedPlayers.popLast() {
@@ -141,6 +166,8 @@ func distributePlayersIntoLeague(using players: Array<Dictionary<String, String>
         }
     }
     
+    // Divide the total height of all players already in the league and those to be
+    // sorted into the league by the number of teams
     var totalHeight = getTotalHeightsOfPlayersInInches(inArray: sortedPlayers)
     for team in leagueTeams {
         if team.count > 0 {
@@ -149,7 +176,42 @@ func distributePlayersIntoLeague(using players: Array<Dictionary<String, String>
     }
     let dividedSum = totalHeight / leagueTeams.count
 
-    //TODO: Continue implementation with step d above
+    /* Choose only teams that have the fewest number of players, and identify the
+     * team that has an average height that is farthest from the dividedSum
+     */
+    while sortedPlayers.count > 0 {
+        let currentMinPlayersPerTeam = getNumPlayersOnSmallestTeam()
+        
+        var targetDifference: Int = 0
+        var targetTeamIndex = 0
+        for team in leagueTeams {
+            if team.count == currentMinPlayersPerTeam {
+                let teamKeySum = getSum(ofDistributionKeys: "Height (inches)",
+                                        inArray: team)
+                let difference = abs(teamKeySum - dividedSum)
+                if targetDifference == 0 || difference < targetDifference {
+                    targetDifference = difference
+                    targetTeamIndex = leagueTeams.index(of: team)!
+                }
+            }
+        }
+        
+        // Pop the next player from the sorted team and add him or her to the team
+        // that was identified in the last step
+        if let nextPlayer = sortedPlayers.popLast() {
+            leagueTeams[targetTeamIndex].append(nextPlayer)
+        }
+    }
+}
+
+// TODO: Comment this function
+func getAverageHeightForPlayers(onTeam team: Array<Dictionary<String, String>>) -> Double {
+    var sum: Double = 0.0
+    for player in team {
+        sum += Double(player["Height (inches)"]!)!
+    }
+    
+    return sum / Double(team.count)
 }
 
 /* Returns null. Iterates through an array of dictionaries, which each represent
@@ -167,9 +229,16 @@ func printPlayersToConsole(forTeam team: Array<Dictionary<String, String>>) -> (
     }
 }
 
-// TODO: Implement this function
+// TODO: Complete this function
 func printTeamsToConsole(forTeams teams: Array<Array<Dictionary<String, String>>>) -> () {
-    
+    for team in teams {
+        let averageHeight = getAverageHeightForPlayers(onTeam: team)
+        // TODO: Print average height to 1st significant digit
+        print("Team #\(teams.index(of: team)!) (Avg Height: \(averageHeight)\")")
+        print("----------------------------")
+        printPlayersToConsole(forTeam: team)
+        print()
+    }
 }
 
 // TODO: Implement this function
