@@ -189,7 +189,7 @@ func distributePlayersIntoLeague(using players: Array<Dictionary<String, String>
                 let teamKeySum = getSum(ofDistributionKeys: "Height (inches)",
                                         inArray: team)
                 let difference = abs(teamKeySum - dividedSum)
-                if targetDifference == 0 || difference < targetDifference {
+                if targetDifference == 0 || difference > targetDifference {
                     targetDifference = difference
                     targetTeamIndex = leagueTeams.index(of: team)!
                 }
