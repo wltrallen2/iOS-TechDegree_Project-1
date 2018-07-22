@@ -59,11 +59,6 @@ var teamDragons: [[String: String]] = []
 var teamRaptors: [[String: String]] = []
 
 
-// A global variable that represents the three disparate teams into a league.
-// It takes the form: Array<Array<Dictionary<String, String>>>.
-var leagueTeams = [teamSharks, teamDragons, teamRaptors]
-
-
 /**********************************************************************
  HELPER FUNCTIONS
  ----------------
@@ -103,7 +98,7 @@ func getTotalHeightsOfPlayersInInches(inArray players: Array<Dictionary<String, 
 
 // TODO: Comment this function
 func hasEmptyTeams(in arrayOfTeams: Array<Array<Dictionary<String, String>>>) -> Bool {
-    for team in leagueTeams {
+    for team in arrayOfTeams {
         if team.count == 0 {
             return true
         }
@@ -113,9 +108,9 @@ func hasEmptyTeams(in arrayOfTeams: Array<Array<Dictionary<String, String>>>) ->
 }
 
 // TODO: Comment this function
-func getNumPlayersOnSmallestTeam() -> Int {
+func getNumPlayersOnSmallestTeam(in arrayOfTeams: Array<Array<Dictionary<String, String>>>) -> Int {
     var minPlayers: Int = 0
-    for team in leagueTeams {
+    for team in arrayOfTeams {
         if minPlayers == 0 || team.count < minPlayers {
             minPlayers = team.count
         }
@@ -132,6 +127,16 @@ func getSum(ofDistributionKeys key: String,
         sum += Int(dict[key]!)!
     }
     return sum
+}
+
+func add(_ newPlayer: Dictionary<String, String>, toLeagueAtIndex index: Int) -> [Array<Dictionary<String, String>>] {
+    switch index {
+    case 0: teamDragons.append(newPlayer)
+    case 1: teamSharks.append(newPlayer)
+    default: teamRaptors.append(newPlayer) // TODO: The rest of this function needs to be refractored for leagueTeams?
+    }
+    
+    return [teamDragons, teamSharks, teamRaptors]
 }
 
 /*
@@ -156,15 +161,18 @@ func getSum(ofDistributionKeys key: String,
  * e) Place the next player dictionary in the identified team, and
  * f) Repeat steps d & e until all players have been placed into league teams
  */
-func distributePlayersIntoLeague(using players: Array<Dictionary<String, String>>,
-                                 andDistributionKey distributionKey: String) -> () {
+func distribute(players players: Array<Dictionary<String, String>>,
+                intoTeams teams: Array<Array<Dictionary<String, String>>>,
+                usingDistributionKey distributionKey: String) -> Array<Array<Dictionary<String, String>>> {
     var sortedPlayers = players.sorted{$0[distributionKey]! < $1[distributionKey]!}
+    
+    var leagueTeams = teams
     
     // If all teams are empty, place one player from the sorted arrage on each team
     if hasEmptyTeams(in: leagueTeams) {
         for index in leagueTeams.indices {
             if let newPlayer = sortedPlayers.popLast() {
-                leagueTeams[index].append(newPlayer)
+                leagueTeams = add(newPlayer, toLeagueAtIndex: index)
             }
         }
     }
@@ -183,7 +191,7 @@ func distributePlayersIntoLeague(using players: Array<Dictionary<String, String>
      * team that has an average height that is farthest from the dividedSum
      */
     while sortedPlayers.count > 0 {
-        let currentMinPlayersPerTeam = getNumPlayersOnSmallestTeam()
+        let currentMinPlayersPerTeam = getNumPlayersOnSmallestTeam(in: leagueTeams) // refractored?
         
         var targetDifference: Int = 0
         var targetTeamIndex = 0
@@ -202,9 +210,11 @@ func distributePlayersIntoLeague(using players: Array<Dictionary<String, String>
         // Pop the next player from the sorted team and add him or her to the team
         // that was identified in the last step
         if let nextPlayer = sortedPlayers.popLast() {
-            leagueTeams[targetTeamIndex].append(nextPlayer)
+            leagueTeams = add(nextPlayer, toLeagueAtIndex: targetTeamIndex)
         }
     }
+    
+    return leagueTeams
 }
 
 // TODO: Comment this function
@@ -291,11 +301,14 @@ func printLettersToConsole(using letters: Array<String>) -> () {
  - prints those letters to the console.
  **********************************************************************/
 let (experiencedPlayers, inexperiencedPlayers) = dividePlayersByExperienceLevels()
-distributePlayersIntoLeague(using: experiencedPlayers,
-                            andDistributionKey: "Height (inches)")
-distributePlayersIntoLeague(using: inexperiencedPlayers,
-                            andDistributionKey: "Height (inches)")
-printTeamsToConsole(forTeams: leagueTeams)
+var leagueTeams = [teamDragons, teamSharks, teamRaptors]
+leagueTeams = distribute(players: experiencedPlayers,
+           intoTeams: leagueTeams,
+           usingDistributionKey: "Height (inches)")
+leagueTeams = distribute(players: inexperiencedPlayers,
+           intoTeams: leagueTeams,
+           usingDistributionKey: "Height (inches)")
+printTeamsToConsole(forTeams: [teamDragons, teamSharks, teamRaptors])
 
-let letters = createLetters(forMembersOfTeams: leagueTeams)
+let letters = createLetters(forMembersOfTeams: [teamDragons, teamSharks, teamRaptors])
 printLettersToConsole(using: letters)
