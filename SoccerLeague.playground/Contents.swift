@@ -281,6 +281,23 @@ func getTeamName(forTeam team: Array<Dictionary<String, String>>) -> String {
     return teamName
 }
 
+// Returns a String representing the first practice date and time of the passed team
+func getFirstPracticeTime(forTeam team: Array<Dictionary<String, String>>) -> String {
+    // Set a default value for the teamName variable
+    var practiceInfo = "March 17 at 1 p.m."
+    
+    // Test to see if the elements in the passed array (team) are equal to the elements
+    // in one of the other two teams. If so, reset the practiceInfo variable to that team's
+    // first practice info. If not, then the teamName is the default.
+    if team.elementsEqual(teamSharks) {
+        practiceInfo = "March 17 at 3 p.m."
+    } else if team.elementsEqual(teamRaptors) {
+        practiceInfo = "March 18 at 1 p.m."
+    }
+    
+    return practiceInfo
+}
+
 /* Returns null. Prints the teams to the console identifying them by team name
  * and average height. Then, prints the name of each team member, whether that player
  * has experience (Y or N), and his or her height.
@@ -298,14 +315,40 @@ func printTeamsToConsole(forTeams teams: Array<Array<Dictionary<String, String>>
     }
 }
 
-// TODO: Implement this function
+/* Returns an Array of Strings, each representing a welcome letter that includes
+ * the student's guardians' names, the student's name, the name of the team that
+ * they are on, and the date and time of the team's first practice.
+ */
 func createLetters(forMembersOfTeams teams: Array<Array<Dictionary<String, String>>>) -> Array<String> {
-    return []
+    var letters: [String] = []
+    for team in teams {
+        let teamName = getTeamName(forTeam: team)
+        let firstPractice = getFirstPracticeTime(forTeam: team)
+        for player in team {
+            let playerName = player["Name"] as! String
+            let playerGuardian = player["Guardian Name(s)"] as! String
+            let letter = "Dear \(playerGuardian),\n" +
+                "Congratulations! \(playerName) has been chosen to be a part\n" +
+                "of Team \(teamName) for this season! Your future soccer star's\n" +
+                "practice will be \(firstPractice) at the West Monroe Rec Center.\n" +
+                "We are looking forward to a great season! Now, let's play ball!\n\n" +
+                "Respectfully,\n" +
+                "Walter Allen\n" +
+                "League Coordinator\n\n\n"
+            letters.append(letter)
+        }
+    }
+    
+    return letters
 }
 
-// TODO: Implement this function
+/* Returns null. Prints each string (reprsenting a letter to the guardians of
+ * the team players) to the console.
+ */
 func printLettersToConsole(using letters: Array<String>) -> () {
-    
+    for letter in letters {
+        print(letter)
+    }
 }
 
 
@@ -338,6 +381,6 @@ leagueTeams = distribute(players: inexperiencedPlayers,
            usingDistributionKey: "Height (inches)")
 printTeamsToConsole(forTeams: [teamDragons, teamSharks, teamRaptors])
 
-print("**** WELCOME LETTERS ****")
+print("\n\n**** WELCOME LETTERS ****\n\n")
 let letters = createLetters(forMembersOfTeams: [teamDragons, teamSharks, teamRaptors])
 printLettersToConsole(using: letters)
