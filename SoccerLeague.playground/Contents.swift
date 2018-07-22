@@ -8,7 +8,7 @@
  It divides a hard-coded dictionary of team players into three equal
  teams, ensuring that each team has an equal number of players with
  expeience and an equal number of players without experience and that
- each team's average height is within 1.5 cm of the other teams'
+ each team's average height is within 1.5 inches of the other teams'
  average heights.
  
  The program then creates Welcome Letters for each team and outputs
@@ -22,28 +22,82 @@ import Foundation
 /**********************************************************************
  CONSTANTS and GLOBAL VARIABLES
  **********************************************************************/
-/* The following sixteen constants are [String : String] dictionaries,
+/* The following sixteen constants are of type Dictionary<String, String>,
  each representing one player with the following keys:
  "Name", "Height (inches)", "Soccer Experience", and "Guardian Name(s)".
  */
-let player1 = ["Name": "Joe Smith", "Height (inches)": "42", "Soccer Experience": "YES", "Guardian Name(s)": "Jim and Jan Smith"]
-let player2 = ["Name": "Jill Tanner", "Height (inches)": "36", "Soccer Experience": "YES", "Guardian Name(s)": "Clara Tanner"]
-let player3 = ["Name": "Bill Bon", "Height (inches)": "43", "Soccer Experience": "YES", "Guardian Name(s)": "Sara and Jenny Bon"]
-let player4 = ["Name": "Eva Gordon", "Height (inches)": "45", "Soccer Experience": "NO", "Guardian Name(s)": "Wendy and Mike Gordon"]
-let player5 = ["Name": "Matt Gill", "Height (inches)": "40", "Soccer Experience": "NO", "Guardian Name(s)": "Charles and Sylvia Gill"]
-let player6 = ["Name": "Kimmy Stein", "Height (inches)": "41", "Soccer Experience": "NO", "Guardian Name(s)": "Bill and Hillary Stein"]
-let player7 = [ "Name": "Sammy Adams", "Height (inches)": "45", "Soccer Experience": "NO", "Guardian Name(s)": "Jeff Adams"]
-let player8 = ["Name": "Karl Saygan", "Height (inches)": "42", "Soccer Experience": "YES", "Guardian Name(s)": "Heather Bledsoe"]
-let player9 = ["Name": "Suzane Greenberg", "Height (inches)": "44", "Soccer Experience": "YES", "Guardian Name(s)": "Henrietta Dumas"]
-let player10 = ["Name": "Sal Dali", "Height (inches)": "41", "Soccer Experience": "NO", "Guardian Name(s)": "Gala Dali"]
-let player11 = ["Name": "Joe Kavalier", "Height (inches)": "39", "Soccer Experience": "NO", "Guardian Name(s)": "Sam and Elaine Kavalier"]
-let player12 = ["Name": "Ben Finkelstein", "Height (inches)": "44", "Soccer Experience": "NO", "Guardian Name(s)": "Aaron and Jill Finkelstein"]
-let player13 = ["Name": "Diego Soto", "Height (inches)": "41", "Soccer Experience": "YES", "Guardian Name(s)": "Robin and Sarika Soto"]
-let player14 = ["Name": "Chloe Alaska", "Height (inches)": "47", "Soccer Experience": "NO", "Guardian Name(s)": "David and Jamie Alaska"]
-let player15 = ["Name": "Arnold Willis", "Height (inches)": "43", "Soccer Experience": "NO", "Guardian Name(s)": "Claire Willis"]
-let player16 = ["Name": "Phillip Helm", "Height (inches)": "44", "Soccer Experience": "YES", "Guardian Name(s)": "Thomas Helm and Eva Jones"]
-let player17 = ["Name": "Les Clay", "Height (inches)": "42", "Soccer Experience": "YES", "Guardian Name(s)": "Wynonna Brown"]
-let player18 = ["Name": "Herschel Krustofski", "Height (inches)": "45", "Soccer Experience": "YES", "Guardian Name(s)": "Hyman and Rachel Krustofski"]
+let player1 = ["Name": "Joe Smith",
+               "Height (inches)": "42",
+               "Soccer Experience": "YES",
+               "Guardian Name(s)": "Jim and Jan Smith"]
+let player2 = ["Name": "Jill Tanner",
+               "Height (inches)": "36",
+               "Soccer Experience": "YES",
+               "Guardian Name(s)": "Clara Tanner"]
+let player3 = ["Name": "Bill Bon",
+               "Height (inches)": "43",
+               "Soccer Experience": "YES",
+               "Guardian Name(s)": "Sara and Jenny Bon"]
+let player4 = ["Name": "Eva Gordon",
+               "Height (inches)": "45",
+               "Soccer Experience": "NO",
+               "Guardian Name(s)": "Wendy and Mike Gordon"]
+let player5 = ["Name": "Matt Gill",
+               "Height (inches)": "40",
+               "Soccer Experience": "NO",
+               "Guardian Name(s)": "Charles and Sylvia Gill"]
+let player6 = ["Name": "Kimmy Stein",
+               "Height (inches)": "41",
+               "Soccer Experience": "NO",
+               "Guardian Name(s)": "Bill and Hillary Stein"]
+let player7 = [ "Name": "Sammy Adams",
+                "Height (inches)": "45",
+                "Soccer Experience": "NO",
+                "Guardian Name(s)": "Jeff Adams"]
+let player8 = ["Name": "Karl Saygan",
+               "Height (inches)": "42",
+               "Soccer Experience": "YES",
+               "Guardian Name(s)": "Heather Bledsoe"]
+let player9 = ["Name": "Suzane Greenberg",
+               "Height (inches)": "44",
+               "Soccer Experience": "YES",
+               "Guardian Name(s)": "Henrietta Dumas"]
+let player10 = ["Name": "Sal Dali",
+                "Height (inches)": "41",
+                "Soccer Experience": "NO",
+                "Guardian Name(s)": "Gala Dali"]
+let player11 = ["Name": "Joe Kavalier",
+                "Height (inches)": "39",
+                "Soccer Experience": "NO",
+                "Guardian Name(s)": "Sam and Elaine Kavalier"]
+let player12 = ["Name": "Ben Finkelstein",
+                "Height (inches)": "44",
+                "Soccer Experience": "NO",
+                "Guardian Name(s)": "Aaron and Jill Finkelstein"]
+let player13 = ["Name": "Diego Soto",
+                "Height (inches)": "41",
+                "Soccer Experience": "YES",
+                "Guardian Name(s)": "Robin and Sarika Soto"]
+let player14 = ["Name": "Chloe Alaska",
+                "Height (inches)": "47",
+                "Soccer Experience": "NO",
+                "Guardian Name(s)": "David and Jamie Alaska"]
+let player15 = ["Name": "Arnold Willis",
+                "Height (inches)": "43",
+                "Soccer Experience": "NO",
+                "Guardian Name(s)": "Claire Willis"]
+let player16 = ["Name": "Phillip Helm",
+                "Height (inches)": "44",
+                "Soccer Experience": "YES",
+                "Guardian Name(s)": "Thomas Helm and Eva Jones"]
+let player17 = ["Name": "Les Clay",
+                "Height (inches)": "42",
+                "Soccer Experience": "YES",
+                "Guardian Name(s)": "Wynonna Brown"]
+let player18 = ["Name": "Herschel Krustofski",
+                "Height (inches)": "45",
+                "Soccer Experience": "YES",
+                "Guardian Name(s)": "Hyman and Rachel Krustofski"]
 
 
 // This constant is an array which stores the eighteen soccer player dictionaries.
@@ -54,16 +108,33 @@ let players = [player1, player2, player3, player4, player5, player6,
 
 // Global variables that represent the the three teams that the players will be sorted into.
 // It takes the form: Array<Dictionary<String, String>>.
-var teamSharks: [[String: String]] = []
 var teamDragons: [[String: String]] = []
+var teamSharks: [[String: String]] = []
 var teamRaptors: [[String: String]] = []
 
 
 /**********************************************************************
  HELPER FUNCTIONS
  ----------------
- These helper functions will be used in the primary script at the end of
- the file.
+ These helper functions are called in the primary script at the end of
+ the file or by other helper functions. The functions are listed for
+ reference as follows:
+ 
+ - dividePlayersByExperienceLevels()
+ - getTotalHeightsOfPlayersInInches(inArray:)
+ - hasEmptyTeams(in:)
+ - getNumPlayersOnSmallestTeam(in:)
+ - getSum(ofDistributionKeys:)
+ - add(_newPlayer:, toTeamAtIndex:)
+ - distribute(players:, intoTeams:, usingDistributionKey:)
+ - getAverageHeightForPlayers(onTeam:)
+ - printPlayersToConsole(forTeam:)
+ - formatHeight(_height:)
+ - getTeamName(forTeam:)
+ - getFirstPracticeTime(forTeam:)
+ - printTeamsToConsole(forTeams:)
+ - createLetters(forMembersOfTeams:)
+ - printLettersToConsole(using:)
  **********************************************************************/
 
 /* Returns a tuple of two arrays. Each array is a dictionary of players.
