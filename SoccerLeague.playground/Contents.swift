@@ -253,13 +253,30 @@ func formatHeight(_ height: Double) -> String {
     return formatter.string(for: height)!
 }
 
+// Returns a String representing the team name of the passed team
+func getTeamName(forTeam team: Array<Dictionary<String, String>>) -> String {
+    // Set a default value for the teamName variable
+    var teamName = "Dragons"
+    
+    // Test to see if the elements in the passed array (team) are equal to the elements
+    // in one of the other two teams. If so, reset the teamName variable to that team
+    // name. If not, then the teamName is the default.
+    if team.elementsEqual(teamSharks) {
+        teamName = "Sharks"
+    } else if team.elementsEqual(teamRaptors) {
+        teamName = "Raptors"
+    }
+    
+    return teamName
+}
+
 // TODO: Complete this function
 func printTeamsToConsole(forTeams teams: Array<Array<Dictionary<String, String>>>) -> () {
     for team in teams {
         // TODO: NEXT - Refractor leagueTeams so that it is a dictionary with the key as the
         // team name and the value as the array of player dictionaries.
 
-        let teamName = "NOT YET IMPLEMENTED"
+        let teamName = getTeamName(forTeam: team)
         let avgHeight = getAverageHeightForPlayers(onTeam: team)
         let avgHeightString = formatHeight(avgHeight)
         // TODO: Print average height to 1st significant digit
