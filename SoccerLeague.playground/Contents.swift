@@ -16,6 +16,9 @@
  **********************************************************************/
 
 
+import Foundation
+
+
 /**********************************************************************
  CONSTANTS and GLOBAL VARIABLES
  **********************************************************************/
@@ -229,12 +232,28 @@ func printPlayersToConsole(forTeam team: Array<Dictionary<String, String>>) -> (
     }
 }
 
+// Returns a string that represents the height based on the value (a Double)
+// that is passed in. The returned value will have a maximum of two decimal
+// places.
+func formatHeight(_ height: Double) -> String {
+    let formatter = NumberFormatter()
+    formatter.minimumFractionDigits = 0
+    formatter.maximumFractionDigits = 2
+    
+    return formatter.string(for: height)!
+}
+
 // TODO: Complete this function
 func printTeamsToConsole(forTeams teams: Array<Array<Dictionary<String, String>>>) -> () {
     for team in teams {
-        let averageHeight = getAverageHeightForPlayers(onTeam: team)
+        // TODO: NEXT - Refractor leagueTeams so that it is a dictionary with the key as the
+        // team name and the value as the array of player dictionaries.
+
+        let teamName = "NOT YET IMPLEMENTED"
+        let avgHeight = getAverageHeightForPlayers(onTeam: team)
+        let avgHeightString = formatHeight(avgHeight)
         // TODO: Print average height to 1st significant digit
-        print("Team #\(teams.index(of: team)!) (Avg Height: \(averageHeight)\")")
+        print("Team: \(teamName) (Avg Height: \(avgHeightString)\")")
         print("----------------------------")
         printPlayersToConsole(forTeam: team)
         print()
