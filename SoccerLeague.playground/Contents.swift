@@ -85,7 +85,9 @@ func dividePlayersByExperienceLevels()
     return (expPlayers, inexpPlayers)
 }
 
-// TODO: Comment this function
+/* Returns an Int that represents the sum of all heights, in inches, for each of the
+ * players in the passed array of players.
+ */
 func getTotalHeightsOfPlayersInInches(inArray players: Array<Dictionary<String, String>>) -> Int {
     var totalHeight = 0
     for player in players {
@@ -96,7 +98,9 @@ func getTotalHeightsOfPlayersInInches(inArray players: Array<Dictionary<String, 
     return totalHeight
 }
 
-// TODO: Comment this function
+/* Returns a Bool representing whether or not the array of teams contains any teams
+ * without players.
+ */
 func hasEmptyTeams(in arrayOfTeams: Array<Array<Dictionary<String, String>>>) -> Bool {
     for team in arrayOfTeams {
         if team.count == 0 {
@@ -107,7 +111,7 @@ func hasEmptyTeams(in arrayOfTeams: Array<Array<Dictionary<String, String>>>) ->
     return false
 }
 
-// TODO: Comment this function
+// Returns an Int representing the number of players on the team with the fewest players.
 func getNumPlayersOnSmallestTeam(in arrayOfTeams: Array<Array<Dictionary<String, String>>>) -> Int {
     var minPlayers: Int = 0
     for team in arrayOfTeams {
@@ -119,7 +123,9 @@ func getNumPlayersOnSmallestTeam(in arrayOfTeams: Array<Array<Dictionary<String,
     return minPlayers
 }
 
-// TODO: Comment this function
+/* Returns an Int representing the sum of values for the passed key in the passed array.
+ * Returns zero (0) if the values are not able to be cast to Ints.
+ */
 func getSum(ofDistributionKeys key: String,
             inArray arrayOfDicts: Array<Dictionary<String, String>>) -> Int {
     var sum = 0
@@ -129,7 +135,11 @@ func getSum(ofDistributionKeys key: String,
     return sum
 }
 
-func add(_ newPlayer: Dictionary<String, String>, toLeagueAtIndex index: Int) -> [Array<Dictionary<String, String>>] {
+/* Returns an array of players by adding a new player dictionary to the team array
+ * using the given index values. The index values are hard coded due to the project
+ * instructions to use three different collections to store the player dictionaries.
+ */
+func add(_ newPlayer: Dictionary<String, String>, toTeamAtIndex index: Int) -> [Array<Dictionary<String, String>>] {
     switch index {
     case 0: teamDragons.append(newPlayer)
     case 1: teamSharks.append(newPlayer)
@@ -172,7 +182,7 @@ func distribute(players players: Array<Dictionary<String, String>>,
     if hasEmptyTeams(in: leagueTeams) {
         for index in leagueTeams.indices {
             if let newPlayer = sortedPlayers.popLast() {
-                leagueTeams = add(newPlayer, toLeagueAtIndex: index)
+                leagueTeams = add(newPlayer, toTeamAtIndex: index)
             }
         }
     }
@@ -210,14 +220,14 @@ func distribute(players players: Array<Dictionary<String, String>>,
         // Pop the next player from the sorted team and add him or her to the team
         // that was identified in the last step
         if let nextPlayer = sortedPlayers.popLast() {
-            leagueTeams = add(nextPlayer, toLeagueAtIndex: targetTeamIndex)
+            leagueTeams = add(nextPlayer, toTeamAtIndex: targetTeamIndex)
         }
     }
     
     return leagueTeams
 }
 
-// TODO: Comment this function
+// Returns a Double representing the average height for each team.
 func getAverageHeightForPlayers(onTeam team: Array<Dictionary<String, String>>) -> Double {
     var sum: Double = 0.0
     for player in team {
@@ -242,9 +252,10 @@ func printPlayersToConsole(forTeam team: Array<Dictionary<String, String>>) -> (
     }
 }
 
-// Returns a string that represents the height based on the value (a Double)
-// that is passed in. The returned value will have a maximum of two decimal
-// places.
+/* Returns a string that represents the height based on the value (a Double)
+ * that is passed in. The returned value will have a maximum of two decimal
+ * places.
+ */
 func formatHeight(_ height: Double) -> String {
     let formatter = NumberFormatter()
     formatter.minimumFractionDigits = 0
@@ -270,12 +281,12 @@ func getTeamName(forTeam team: Array<Dictionary<String, String>>) -> String {
     return teamName
 }
 
-// TODO: Complete this function
+/* Returns null. Prints the teams to the console identifying them by team name
+ * and average height. Then, prints the name of each team member, whether that player
+ * has experience (Y or N), and his or her height.
+ */
 func printTeamsToConsole(forTeams teams: Array<Array<Dictionary<String, String>>>) -> () {
     for team in teams {
-        // TODO: NEXT - Refractor leagueTeams so that it is a dictionary with the key as the
-        // team name and the value as the array of player dictionaries.
-
         let teamName = getTeamName(forTeam: team)
         let avgHeight = getAverageHeightForPlayers(onTeam: team)
         let avgHeightString = formatHeight(avgHeight)
@@ -327,5 +338,6 @@ leagueTeams = distribute(players: inexperiencedPlayers,
            usingDistributionKey: "Height (inches)")
 printTeamsToConsole(forTeams: [teamDragons, teamSharks, teamRaptors])
 
+print("**** WELCOME LETTERS ****")
 let letters = createLetters(forMembersOfTeams: [teamDragons, teamSharks, teamRaptors])
 printLettersToConsole(using: letters)
