@@ -7,7 +7,7 @@ This project was created to satisfy the requirements of the
 
 It divides a hard-coded dictionary of team players into three equal
 teams, ensuring that each team has an equal number of players with
-expeience and an equal number of players without experience and that
+experience and an equal number of players without experience and that
 each team's average height is within 1.5 inches of the other teams'
 average heights.
 
