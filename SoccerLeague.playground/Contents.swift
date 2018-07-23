@@ -162,8 +162,9 @@ func dividePlayersByExperienceLevels()
 func getTotalHeightsOfPlayersInInches(inArray players: Array<Dictionary<String, String>>) -> Int {
     var totalHeight = 0
     for player in players {
-        let playerHeight = player["Height (inches)"] as! String
-        totalHeight += Int(playerHeight)!
+        if let playerHeight = player["Height (inches)"] as String? {
+            totalHeight += Int(playerHeight)!
+        }
     }
     
     return totalHeight
@@ -242,7 +243,7 @@ func add(_ newPlayer: Dictionary<String, String>, toTeamAtIndex index: Int) -> [
  * e) Place the next player dictionary in the identified team, and
  * f) Repeat steps d & e until all players have been placed into league teams
  */
-func distribute(players players: Array<Dictionary<String, String>>,
+func distribute(players: Array<Dictionary<String, String>>,
                 intoTeams teams: Array<Array<Dictionary<String, String>>>,
                 usingDistributionKey distributionKey: String) -> Array<Array<Dictionary<String, String>>> {
     var sortedPlayers = players.sorted{$0[distributionKey]! < $1[distributionKey]!}
@@ -315,11 +316,12 @@ func getAverageHeightForPlayers(onTeam team: Array<Dictionary<String, String>>) 
 func printPlayersToConsole(forTeam team: Array<Dictionary<String, String>>) -> () {
     for player in team {
         player
-        let name = player["Name"] as! String
-        let height = player["Height (inches)"] as! String
-        let experience = player["Soccer Experience"]
-        let expMarker = experience == "YES" ? "Y" : "N"
-        print("\(name) (\(expMarker)) - \(height)\"")
+        if let name = player["Name"] as String?,
+            let height = player["Height (inches)"] as String? {
+            let experience = player["Soccer Experience"]
+            let expMarker = experience == "YES" ? "Y" : "N"
+            print("\(name) (\(expMarker)) - \(height)\"")
+        }
     }
 }
 
@@ -396,17 +398,18 @@ func createLetters(forMembersOfTeams teams: Array<Array<Dictionary<String, Strin
         let teamName = getTeamName(forTeam: team)
         let firstPractice = getFirstPracticeTime(forTeam: team)
         for player in team {
-            let playerName = player["Name"] as! String
-            let playerGuardian = player["Guardian Name(s)"] as! String
-            let letter = "Dear \(playerGuardian),\n" +
-                "Congratulations! \(playerName) has been chosen to be a part\n" +
-                "of Team \(teamName) for this season! Your future soccer star's\n" +
-                "practice will be \(firstPractice) at the West Monroe Rec Center.\n" +
-                "We are looking forward to a great season! Now, let's play ball!\n\n" +
-                "Respectfully,\n" +
-                "Walter Allen\n" +
+            if let playerName = player["Name"] as String?,
+                let playerGuardian = player["Guardian Name(s)"] as String? {
+                let letter = "Dear \(playerGuardian),\n" +
+                    "Congratulations! \(playerName) has been chosen to be a part\n" +
+                    "of Team \(teamName) for this season! Your future soccer star's\n" +
+                    "practice will be \(firstPractice) at the West Monroe Rec Center.\n" +
+                    "We are looking forward to a great season! Now, let's play ball!\n\n" +
+                    "Respectfully,\n" +
+                    "Walter Allen\n" +
                 "League Coordinator\n\n\n"
-            letters.append(letter)
+                letters.append(letter)
+            }
         }
     }
     
