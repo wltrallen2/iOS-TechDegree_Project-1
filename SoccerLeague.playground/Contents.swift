@@ -22,82 +22,82 @@ import Foundation
 /**********************************************************************
  CONSTANTS and GLOBAL VARIABLES
  **********************************************************************/
-/* The following sixteen constants are of type Dictionary<String, String>,
+/* The following sixteen constants are of type Dictionary<String, Any>,
  each representing one player with the following keys:
- "Name", "Height (inches)", "Soccer Experience", and "Guardian Name(s)".
+ "name", "heightInInches", "hasExperience", and "guardianNames".
  */
-let player1 = ["Name": "Joe Smith",
-               "Height (inches)": "42",
-               "Soccer Experience": "YES",
-               "Guardian Name(s)": "Jim and Jan Smith"]
-let player2 = ["Name": "Jill Tanner",
-               "Height (inches)": "36",
-               "Soccer Experience": "YES",
-               "Guardian Name(s)": "Clara Tanner"]
-let player3 = ["Name": "Bill Bon",
-               "Height (inches)": "43",
-               "Soccer Experience": "YES",
-               "Guardian Name(s)": "Sara and Jenny Bon"]
-let player4 = ["Name": "Eva Gordon",
-               "Height (inches)": "45",
-               "Soccer Experience": "NO",
-               "Guardian Name(s)": "Wendy and Mike Gordon"]
-let player5 = ["Name": "Matt Gill",
-               "Height (inches)": "40",
-               "Soccer Experience": "NO",
-               "Guardian Name(s)": "Charles and Sylvia Gill"]
-let player6 = ["Name": "Kimmy Stein",
-               "Height (inches)": "41",
-               "Soccer Experience": "NO",
-               "Guardian Name(s)": "Bill and Hillary Stein"]
-let player7 = [ "Name": "Sammy Adams",
-                "Height (inches)": "45",
-                "Soccer Experience": "NO",
-                "Guardian Name(s)": "Jeff Adams"]
-let player8 = ["Name": "Karl Saygan",
-               "Height (inches)": "42",
-               "Soccer Experience": "YES",
-               "Guardian Name(s)": "Heather Bledsoe"]
-let player9 = ["Name": "Suzane Greenberg",
-               "Height (inches)": "44",
-               "Soccer Experience": "YES",
-               "Guardian Name(s)": "Henrietta Dumas"]
-let player10 = ["Name": "Sal Dali",
-                "Height (inches)": "41",
-                "Soccer Experience": "NO",
-                "Guardian Name(s)": "Gala Dali"]
-let player11 = ["Name": "Joe Kavalier",
-                "Height (inches)": "39",
-                "Soccer Experience": "NO",
-                "Guardian Name(s)": "Sam and Elaine Kavalier"]
-let player12 = ["Name": "Ben Finkelstein",
-                "Height (inches)": "44",
-                "Soccer Experience": "NO",
-                "Guardian Name(s)": "Aaron and Jill Finkelstein"]
-let player13 = ["Name": "Diego Soto",
-                "Height (inches)": "41",
-                "Soccer Experience": "YES",
-                "Guardian Name(s)": "Robin and Sarika Soto"]
-let player14 = ["Name": "Chloe Alaska",
-                "Height (inches)": "47",
-                "Soccer Experience": "NO",
-                "Guardian Name(s)": "David and Jamie Alaska"]
-let player15 = ["Name": "Arnold Willis",
-                "Height (inches)": "43",
-                "Soccer Experience": "NO",
-                "Guardian Name(s)": "Claire Willis"]
-let player16 = ["Name": "Phillip Helm",
-                "Height (inches)": "44",
-                "Soccer Experience": "YES",
-                "Guardian Name(s)": "Thomas Helm and Eva Jones"]
-let player17 = ["Name": "Les Clay",
-                "Height (inches)": "42",
-                "Soccer Experience": "YES",
-                "Guardian Name(s)": "Wynonna Brown"]
-let player18 = ["Name": "Herschel Krustofski",
-                "Height (inches)": "45",
-                "Soccer Experience": "YES",
-                "Guardian Name(s)": "Hyman and Rachel Krustofski"]
+let player1: [String: Any] = ["name": "Joe Smith",
+                              "heightInInches": 42,
+                              "hasExperience": true,
+                              "guardianNames": "Jim and Jan Smith"]
+let player2: [String: Any]  = ["name": "Jill Tanner",
+                               "heightInInches": 36,
+                               "hasExperience": true,
+                               "guardianNames": "Clara Tanner"]
+let player3: [String: Any]  = ["name": "Bill Bon",
+                               "heightInInches": 43,
+                               "hasExperience": true,
+                               "guardianNames": "Sara and Jenny Bon"]
+let player4: [String: Any]  = ["name": "Eva Gordon",
+                               "heightInInches": 45,
+                               "hasExperience": false,
+                               "guardianNames": "Wendy and Mike Gordon"]
+let player5: [String: Any]  = ["name": "Matt Gill",
+                               "heightInInches": 40,
+                               "hasExperience": false,
+                               "guardianNames": "Charles and Sylvia Gill"]
+let player6: [String: Any]  = ["name": "Kimmy Stein",
+                               "heightInInches": 41,
+                               "hasExperience": false,
+                               "guardianNames": "Bill and Hillary Stein"]
+let player7: [String: Any]  = [ "name": "Sammy Adams",
+                                "heightInInches": 45,
+                                "hasExperience": false,
+                                "guardianNames": "Jeff Adams"]
+let player8: [String: Any]  = ["name": "Karl Saygan",
+                               "heightInInches": 42,
+                               "hasExperience": true,
+                               "guardianNames": "Heather Bledsoe"]
+let player9: [String: Any]  = ["name": "Suzane Greenberg",
+                               "heightInInches": 44,
+                               "hasExperience": true,
+                               "guardianNames": "Henrietta Dumas"]
+let player10: [String: Any]  = ["name": "Sal Dali",
+                                "heightInInches": 41,
+                                "hasExperience": false,
+                                "guardianNames": "Gala Dali"]
+let player11: [String: Any]  = ["name": "Joe Kavalier",
+                                "heightInInches": 39,
+                                "hasExperience": false,
+                                "guardianNames": "Sam and Elaine Kavalier"]
+let player12: [String: Any]  = ["name": "Ben Finkelstein",
+                                "heightInInches": 44,
+                                "hasExperience": false,
+                                "guardianNames": "Aaron and Jill Finkelstein"]
+let player13: [String: Any]  = ["name": "Diego Soto",
+                                "heightInInches": 41,
+                                "hasExperience": true,
+                                "guardianNames": "Robin and Sarika Soto"]
+let player14: [String: Any]  = ["name": "Chloe Alaska",
+                                "heightInInches": 47,
+                                "hasExperience": false,
+                                "guardianNames": "David and Jamie Alaska"]
+let player15: [String: Any]  = ["name": "Arnold Willis",
+                                "heightInInches": 43,
+                                "hasExperience": false,
+                                "guardianNames": "Claire Willis"]
+let player16: [String: Any]  = ["name": "Phillip Helm",
+                                "heightInInches": 44,
+                                "hasExperience": true,
+                                "guardianNames": "Thomas Helm and Eva Jones"]
+let player17: [String: Any]  = ["name": "Les Clay",
+                                "heightInInches": 42,
+                                "hasExperience": true,
+                                "guardianNames": "Wynonna Brown"]
+let player18: [String: Any]  = ["name": "Herschel Krustofski",
+                                "heightInInches": 45,
+                                "hasExperience": true,
+                                "guardianNames": "Hyman and Rachel Krustofski"]
 
 
 // This constant is an array which stores the eighteen soccer player dictionaries.
@@ -107,10 +107,10 @@ let players = [player1, player2, player3, player4, player5, player6,
 
 
 // Global variables that represent the the three teams that the players will be sorted into.
-// It takes the form: Array<Dictionary<String, String>>.
-var teamDragons: [[String: String]] = []
-var teamSharks: [[String: String]] = []
-var teamRaptors: [[String: String]] = []
+// It takes the form: Array<Dictionary<String, Any>>.
+var teamDragons: [[String: Any]] = []
+var teamSharks: [[String: Any]] = []
+var teamRaptors: [[String: Any]] = []
 
 
 /**********************************************************************
@@ -142,12 +142,12 @@ var teamRaptors: [[String: String]] = []
  * represents players without experience.
  */
 func dividePlayersByExperienceLevels()
-    -> (Array<Dictionary<String, String>>, Array<Dictionary<String, String>>) {
-    var expPlayers: Array<Dictionary<String, String>> = []
-    var inexpPlayers: Array<Dictionary<String, String>> = []
+    -> (Array<Dictionary<String, Any>>, Array<Dictionary<String, Any>>) {
+    var expPlayers: Array<Dictionary<String, Any>> = []
+    var inexpPlayers: Array<Dictionary<String, Any>> = []
         
         for player in players {
-            if player["Soccer Experience"] == "YES" {
+            if (player["hasExperience"] != nil) {
                 expPlayers.append(player)
             } else {
                 inexpPlayers.append(player)
@@ -159,12 +159,11 @@ func dividePlayersByExperienceLevels()
 /* Returns an Int that represents the sum of all heights, in inches, for each of the
  * players in the passed array of players.
  */
-func getTotalHeightsOfPlayersInInches(inArray players: Array<Dictionary<String, String>>) -> Int {
+func getTotalHeightsOfPlayersInInches(inArray players: Array<Dictionary<String, Any>>) -> Int {
     var totalHeight = 0
     for player in players {
-        if let playerHeight = player["Height (inches)"] as String? {
-            totalHeight += Int(playerHeight)!
-        }
+        let playerHeight = player["heightInInches"] as! Int
+        totalHeight += playerHeight
     }
     
     return totalHeight
@@ -173,9 +172,9 @@ func getTotalHeightsOfPlayersInInches(inArray players: Array<Dictionary<String, 
 /* Returns a Bool representing whether or not the array of teams contains any teams
  * without players.
  */
-func hasEmptyTeams(in arrayOfTeams: Array<Array<Dictionary<String, String>>>) -> Bool {
-    for team in arrayOfTeams {
-        if team.count == 0 {
+func hasEmptyTeams(in arrayOfTeams: Dictionary<String, Array<Dictionary<String, Any>>>) -> Bool {
+    for (_, players) in arrayOfTeams {
+        if players.count == 0 {
             return true
         }
     }
@@ -184,9 +183,10 @@ func hasEmptyTeams(in arrayOfTeams: Array<Array<Dictionary<String, String>>>) ->
 }
 
 // Returns an Int representing the number of players on the team with the fewest players.
-func getNumPlayersOnSmallestTeam(in arrayOfTeams: Array<Array<Dictionary<String, String>>>) -> Int {
+func getNumPlayersOnSmallestTeam(in arrayOfTeams:
+    Dictionary<String, Array<Dictionary<String, Any>>>) -> Int {
     var minPlayers: Int = 0
-    for team in arrayOfTeams {
+    for (_, team) in arrayOfTeams {
         if minPlayers == 0 || team.count < minPlayers {
             minPlayers = team.count
         }
@@ -199,10 +199,10 @@ func getNumPlayersOnSmallestTeam(in arrayOfTeams: Array<Array<Dictionary<String,
  * Returns zero (0) if the values are not able to be cast to Ints.
  */
 func getSum(ofDistributionKeys key: String,
-            inArray arrayOfDicts: Array<Dictionary<String, String>>) -> Int {
+            inArray arrayOfDicts: Array<Dictionary<String, Any>>) -> Int {
     var sum = 0
     for dict in arrayOfDicts {
-        sum += Int(dict[key]!)!
+        sum += dict[key] as! Int
     }
     return sum
 }
@@ -211,14 +211,20 @@ func getSum(ofDistributionKeys key: String,
  * using the given index values. The index values are hard coded due to the project
  * instructions to use three different collections to store the player dictionaries.
  */
-func add(_ newPlayer: Dictionary<String, String>, toTeamAtIndex index: Int) -> [Array<Dictionary<String, String>>] {
-    switch index {
-    case 0: teamDragons.append(newPlayer)
-    case 1: teamSharks.append(newPlayer)
-    default: teamRaptors.append(newPlayer) // TODO: The rest of this function needs to be refractored for leagueTeams?
-    }
+func add(_ newPlayer: Dictionary<String, Any>,
+         toTeamWithName teamName: String) -> Dictionary<String, Array<Dictionary<String, Any>>> {
+            if teamName == "Dragons" {
+                teamDragons.append(newPlayer)
+            } else if teamName == "Sharks" {
+                teamSharks.append(newPlayer)
+            } else {
+                teamRaptors.append(newPlayer)
+            }
+            
     
-    return [teamDragons, teamSharks, teamRaptors]
+            return ["Dragons": teamDragons,
+                    "Sharks": teamSharks,
+                    "Raptors": teamRaptors]
 }
 
 /*
@@ -243,18 +249,20 @@ func add(_ newPlayer: Dictionary<String, String>, toTeamAtIndex index: Int) -> [
  * e) Place the next player dictionary in the identified team, and
  * f) Repeat steps d & e until all players have been placed into league teams
  */
-func distribute(players: Array<Dictionary<String, String>>,
-                intoTeams teams: Array<Array<Dictionary<String, String>>>,
-                usingDistributionKey distributionKey: String) -> Array<Array<Dictionary<String, String>>> {
-    var sortedPlayers = players.sorted{$0[distributionKey]! < $1[distributionKey]!}
+func distribute(players: Array<Dictionary<String, Any>>,
+                intoTeams teams: Dictionary<String, Array<Dictionary<String, Any>>>,
+                usingDistributionKey distributionKey: String)
+                    -> Dictionary<String, Array<Dictionary<String, Any>>> {
+    var sortedPlayers = players.sorted{($0[distributionKey] as! Int) <
+                                       ($1[distributionKey] as! Int)}
     
     var leagueTeams = teams
     
     // If all teams are empty, place one player from the sorted arrage on each team
     if hasEmptyTeams(in: leagueTeams) {
-        for index in leagueTeams.indices {
+        for (teamName, _) in leagueTeams {
             if let newPlayer = sortedPlayers.popLast() {
-                leagueTeams = add(newPlayer, toTeamAtIndex: index)
+                leagueTeams = add(newPlayer, toTeamWithName: teamName)
             }
         }
     }
@@ -262,9 +270,9 @@ func distribute(players: Array<Dictionary<String, String>>,
     // Divide the total height of all players already in the league and those to be
     // sorted into the league by the number of teams
     var totalHeight = getTotalHeightsOfPlayersInInches(inArray: sortedPlayers)
-    for team in leagueTeams {
-        if team.count > 0 {
-            totalHeight += getTotalHeightsOfPlayersInInches(inArray: team)
+    for (_, players) in leagueTeams {
+        if players.count > 0 {
+            totalHeight += getTotalHeightsOfPlayersInInches(inArray: players)
         }
     }
     let dividedSum = totalHeight / leagueTeams.count
@@ -273,18 +281,18 @@ func distribute(players: Array<Dictionary<String, String>>,
      * team that has an average height that is farthest from the dividedSum
      */
     while sortedPlayers.count > 0 {
-        let currentMinPlayersPerTeam = getNumPlayersOnSmallestTeam(in: leagueTeams) // refractored?
+        let currentMinPlayersPerTeam = getNumPlayersOnSmallestTeam(in: leagueTeams)
         
         var targetDifference: Int = 0
-        var targetTeamIndex = 0
-        for team in leagueTeams {
+        var targetTeamName = ""
+        for (teamName, team) in leagueTeams {
             if team.count == currentMinPlayersPerTeam {
-                let teamKeySum = getSum(ofDistributionKeys: "Height (inches)",
+                let teamKeySum = getSum(ofDistributionKeys: "heightInInches",
                                         inArray: team)
                 let difference = abs(teamKeySum - dividedSum)
                 if targetDifference == 0 || difference > targetDifference {
                     targetDifference = difference
-                    targetTeamIndex = leagueTeams.index(of: team)!
+                    targetTeamName = teamName
                 }
             }
         }
@@ -292,7 +300,7 @@ func distribute(players: Array<Dictionary<String, String>>,
         // Pop the next player from the sorted team and add him or her to the team
         // that was identified in the last step
         if let nextPlayer = sortedPlayers.popLast() {
-            leagueTeams = add(nextPlayer, toTeamAtIndex: targetTeamIndex)
+            leagueTeams = add(nextPlayer, toTeamWithName: targetTeamName)
         }
     }
     
@@ -300,10 +308,10 @@ func distribute(players: Array<Dictionary<String, String>>,
 }
 
 // Returns a Double representing the average height for each team.
-func getAverageHeightForPlayers(onTeam team: Array<Dictionary<String, String>>) -> Double {
+func getAverageHeightForPlayers(onTeam team: Array<Dictionary<String, Any>>) -> Double {
     var sum: Double = 0.0
     for player in team {
-        sum += Double(player["Height (inches)"]!)!
+        sum += Double(player["heightInInches"] as! Int)
     }
     
     return sum / Double(team.count)
@@ -313,13 +321,13 @@ func getAverageHeightForPlayers(onTeam team: Array<Dictionary<String, String>>) 
  * a soccer player, and prints each player in the array as a string in the
  * following format: PlayerName (HasExperience) - Height
 */
-func printPlayersToConsole(forTeam team: Array<Dictionary<String, String>>) -> () {
+func printPlayersToConsole(forTeam team: Array<Dictionary<String, Any>>) -> () {
     for player in team {
         player
-        if let name = player["Name"] as String?,
-            let height = player["Height (inches)"] as String? {
-            let experience = player["Soccer Experience"]
-            let expMarker = experience == "YES" ? "Y" : "N"
+        if let name = player["name"] as? String {
+            let height = player["heightInInches"] as! Int
+            let hasExperience = player["hasExperience"] as! Bool
+            let expMarker = hasExperience ? "Y" : "N"
             print("\(name) (\(expMarker)) - \(height)\"")
         }
     }
@@ -337,50 +345,23 @@ func formatHeight(_ height: Double) -> String {
     return formatter.string(for: height)!
 }
 
-// Returns a String representing the team name of the passed team
-func getTeamName(forTeam team: Array<Dictionary<String, String>>) -> String {
-    // Set a default value for the teamName variable
-    var teamName = "Dragons"
-    
-    // Test to see if the elements in the passed array (team) are equal to the elements
-    // in one of the other two teams. If so, reset the teamName variable to that team
-    // name. If not, then the teamName is the default.
-    if team.elementsEqual(teamSharks) {
-        teamName = "Sharks"
-    } else if team.elementsEqual(teamRaptors) {
-        teamName = "Raptors"
-    }
-    
-    return teamName
-}
-
 // Returns a String representing the first practice date and time of the passed team
-func getFirstPracticeTime(forTeam team: Array<Dictionary<String, String>>) -> String {
-    // Set a default value for the teamName variable
-    var practiceInfo = "March 17 at 1 p.m."
-    
-    // Test to see if the elements in the passed array (team) are equal to the elements
-    // in one of the other two teams. If so, reset the practiceInfo variable to that team's
-    // first practice info. If not, then the teamName is the default.
-    if team.elementsEqual(teamSharks) {
-        practiceInfo = "March 17 at 3 p.m."
-    } else if team.elementsEqual(teamRaptors) {
-        practiceInfo = "March 18 at 1 p.m."
+func getFirstPracticeTime(forTeamNamed teamName: String) -> String {
+    switch(teamName) {
+    case "Dragons" : return "March 17 at 1 p.m."
+    case "Sharks" : return "March 17 at 3 p.m."
+    default: return "March 18 at 1 p.m."
     }
-    
-    return practiceInfo
 }
 
 /* Returns null. Prints the teams to the console identifying them by team name
  * and average height. Then, prints the name of each team member, whether that player
  * has experience (Y or N), and his or her height.
  */
-func printTeamsToConsole(forTeams teams: Array<Array<Dictionary<String, String>>>) -> () {
-    for team in teams {
-        let teamName = getTeamName(forTeam: team)
+func printTeamsToConsole(forTeams teams: Dictionary<String, Array<Dictionary<String, Any>>>) -> () {
+    for (teamName, team) in teams {
         let avgHeight = getAverageHeightForPlayers(onTeam: team)
         let avgHeightString = formatHeight(avgHeight)
-        // TODO: Print average height to 1st significant digit
         print("Team: \(teamName) (Avg Height: \(avgHeightString)\")")
         print("----------------------------")
         printPlayersToConsole(forTeam: team)
@@ -392,14 +373,13 @@ func printTeamsToConsole(forTeams teams: Array<Array<Dictionary<String, String>>
  * the student's guardians' names, the student's name, the name of the team that
  * they are on, and the date and time of the team's first practice.
  */
-func createLetters(forMembersOfTeams teams: Array<Array<Dictionary<String, String>>>) -> Array<String> {
+func createLetters(forMembersOfTeams teams: Dictionary<String, Array<Dictionary<String, Any>>>) -> Array<String> {
     var letters: [String] = []
-    for team in teams {
-        let teamName = getTeamName(forTeam: team)
-        let firstPractice = getFirstPracticeTime(forTeam: team)
+    for (teamName, team) in teams {
+        let firstPractice = getFirstPracticeTime(forTeamNamed: teamName)
         for player in team {
-            if let playerName = player["Name"] as String?,
-                let playerGuardian = player["Guardian Name(s)"] as String? {
+            if let playerName = player["name"] as? String,
+                let playerGuardian = player["guardianNames"] as? String {
                 let letter = "Dear \(playerGuardian),\n" +
                     "Congratulations! \(playerName) has been chosen to be a part\n" +
                     "of Team \(teamName) for this season! Your future soccer star's\n" +
@@ -446,15 +426,17 @@ func printLettersToConsole(using letters: Array<String>) -> () {
  - prints those letters to the console.
  **********************************************************************/
 let (experiencedPlayers, inexperiencedPlayers) = dividePlayersByExperienceLevels()
-var leagueTeams = [teamDragons, teamSharks, teamRaptors]
+var leagueTeams = ["Dragons": teamDragons,
+                   "Sharks": teamSharks,
+                   "Raptors": teamRaptors]
 leagueTeams = distribute(players: experiencedPlayers,
            intoTeams: leagueTeams,
-           usingDistributionKey: "Height (inches)")
+           usingDistributionKey: "heightInInches")
 leagueTeams = distribute(players: inexperiencedPlayers,
            intoTeams: leagueTeams,
-           usingDistributionKey: "Height (inches)")
-printTeamsToConsole(forTeams: [teamDragons, teamSharks, teamRaptors])
+           usingDistributionKey: "heightInInches")
+printTeamsToConsole(forTeams: leagueTeams)
 
 print("\n\n**** WELCOME LETTERS ****\n\n")
-let letters = createLetters(forMembersOfTeams: [teamDragons, teamSharks, teamRaptors])
+let letters = createLetters(forMembersOfTeams: leagueTeams)
 printLettersToConsole(using: letters)
