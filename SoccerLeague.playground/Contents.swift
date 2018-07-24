@@ -146,13 +146,13 @@ func dividePlayersByExperienceLevels()
     var expPlayers: Array<Dictionary<String, Any>> = []
     var inexpPlayers: Array<Dictionary<String, Any>> = []
         
-        for player in players {
-            if (player["hasExperience"] != nil) {
-                expPlayers.append(player)
-            } else {
-                inexpPlayers.append(player)
-            }
+    for player in players {
+        if player["hasExperience"] != nil && player["hasExperience"] as! Bool {
+            expPlayers.append(player)
+        } else {
+            inexpPlayers.append(player)
         }
+    }
     return (expPlayers, inexpPlayers)
 }
 
@@ -255,7 +255,6 @@ func distribute(players: Array<Dictionary<String, Any>>,
                     -> Dictionary<String, Array<Dictionary<String, Any>>> {
     var sortedPlayers = players.sorted{($0[distributionKey] as! Int) <
                                        ($1[distributionKey] as! Int)}
-    
     var leagueTeams = teams
     
     // If all teams are empty, place one player from the sorted arrage on each team
