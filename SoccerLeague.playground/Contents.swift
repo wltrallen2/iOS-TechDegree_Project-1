@@ -157,7 +157,7 @@ func dividePlayersByExperienceLevels()
 }
 
 /* Returns an Int that represents the sum of all heights, in inches, for each of the
- * players in the passed array of players.
+ * players in the passed array of player dictionaries.
  */
 func getTotalHeightsOfPlayersInInches(inArray players: Array<Dictionary<String, Any>>) -> Int {
     var totalHeight = 0
@@ -169,8 +169,8 @@ func getTotalHeightsOfPlayersInInches(inArray players: Array<Dictionary<String, 
     return totalHeight
 }
 
-/* Returns a Bool representing whether or not the array of teams contains any teams
- * without players.
+/* Returns a Bool representing whether or not the array of team dictionaries
+ * is empty.
  */
 func hasEmptyTeams(in arrayOfTeams: Dictionary<String, Array<Dictionary<String, Any>>>) -> Bool {
     for (_, players) in arrayOfTeams {
@@ -187,7 +187,7 @@ func getNumPlayersOnSmallestTeam(in arrayOfTeams:
     Dictionary<String, Array<Dictionary<String, Any>>>) -> Int {
     var minPlayers: Int = 0
     for (_, team) in arrayOfTeams {
-        if minPlayers == 0 || team.count < minPlayers {
+        if team.count < minPlayers || minPlayers == 0 {
             minPlayers = team.count
         }
     }
@@ -207,9 +207,8 @@ func getSum(ofDistributionKeys key: String,
     return sum
 }
 
-/* Returns an array of players by adding a new player dictionary to the team array
- * using the given index values. The index values are hard coded due to the project
- * instructions to use three different collections to store the player dictionaries.
+/* Returns an dictionary of team arrays by adding a new player dictionary
+ * to the team array identified by the value of the passed String "teamName."
  */
 func add(_ newPlayer: Dictionary<String, Any>,
          toTeamWithName teamName: String) -> Dictionary<String, Array<Dictionary<String, Any>>> {
@@ -228,13 +227,14 @@ func add(_ newPlayer: Dictionary<String, Any>,
 }
 
 /*
- * Returns null.
+ * Returns a dictionary of teams, where the keys are the team names and the values
+ * are dictionaries for each player on the team.
+ *
  * Accepts an array of player dictionaries. Then, the function sorts those dictionaries
  * from high to low using the passed variable, distributionKey, which should
  * be a String representing a key in the player dictionary. Then, it
- * distributes the players evenly into the teams arrays in the global variable,
- * league, making sure that the average value for the distributionKey has
- * minimal variance across the teams.
+ * distributes the players evenly into the teams, making sure that the
+ * average value for the distributionKey has minimal variance across the teams.
  *
  * It operates using the following algorithm:
  * a) If no teams have been placed into the league, starting with the
@@ -244,8 +244,8 @@ func add(_ newPlayer: Dictionary<String, Any>,
  * b) Calculate the total for all distributionKey values in the players array
  *    and all players already placed in teams in the league,
  * c) Divide the total by the number of teams in the league (dividedSum),
- * d) From the teams that have the fewest players, identify the team which
- *    has a sum of distributionKey values that is nearest to but less than the dividedsum,
+ * d) From the teams that have the fewest players, identify the team which has
+ *    a sum of distributionKey values that is nearest to but less than the dividedsum,
  * e) Place the next player dictionary in the identified team, and
  * f) Repeat steps d & e until all players have been placed into league teams
  */
@@ -257,7 +257,7 @@ func distribute(players: Array<Dictionary<String, Any>>,
                                        ($1[distributionKey] as! Int)}
     var leagueTeams = teams
     
-    // If all teams are empty, place one player from the sorted arrage on each team
+    // If all teams are empty, place one player from the sorted array on each team
     if hasEmptyTeams(in: leagueTeams) {
         for (teamName, _) in leagueTeams {
             if let newPlayer = sortedPlayers.popLast() {
@@ -277,7 +277,8 @@ func distribute(players: Array<Dictionary<String, Any>>,
     let dividedSum = totalHeight / leagueTeams.count
 
     /* Choose only teams that have the fewest number of players, and identify the
-     * team that has an average height that is farthest from the dividedSum
+     * team that has an average height that is farthest from the dividedSum.
+     * Repeat until all players have been distributed.
      */
     while sortedPlayers.count > 0 {
         let currentMinPlayersPerTeam = getNumPlayersOnSmallestTeam(in: leagueTeams)
@@ -289,7 +290,7 @@ func distribute(players: Array<Dictionary<String, Any>>,
                 let teamKeySum = getSum(ofDistributionKeys: "heightInInches",
                                         inArray: team)
                 let difference = abs(teamKeySum - dividedSum)
-                if targetDifference == 0 || difference > targetDifference {
+                if difference > targetDifference || targetDifference == 0 {
                     targetDifference = difference
                     targetTeamName = teamName
                 }
@@ -322,7 +323,6 @@ func getAverageHeightForPlayers(onTeam team: Array<Dictionary<String, Any>>) -> 
 */
 func printPlayersToConsole(forTeam team: Array<Dictionary<String, Any>>) -> () {
     for player in team {
-        player
         if let name = player["name"] as? String {
             let height = player["heightInInches"] as! Int
             let hasExperience = player["hasExperience"] as! Bool
